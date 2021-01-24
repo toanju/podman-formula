@@ -16,8 +16,7 @@ Debian-9: {}
 Debian-8: {}
 
 # os: Ubuntu
-Ubuntu-18.04:
-  config: /etc/podman.d/custom-ubuntu-18.04.conf
+Ubuntu-18.04: {}
 Ubuntu-16.04: {}
 
 # os: Fedora
@@ -27,10 +26,7 @@ Fedora-30: {}
 # os: CentOS
 CentOS Linux-8: {}
 CentOS Linux-7: {}
-CentOS-6:
-  pkg:
-    name: podman-centos-6
-  config: /etc/podman.d/custom-centos-6.conf
+CentOS-6: {}
 
 # os: Amazon
 Amazon Linux-2: {}

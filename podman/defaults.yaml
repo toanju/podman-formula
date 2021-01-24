@@ -5,7 +5,6 @@ podman:
   pkg:
     name: podman
   rootgroup: root
-  config: '/etc/podman'
   service:
     name: podman
   # Just here for testing

@@ -10,29 +10,15 @@
 # you will need to provide at least an empty dict in this file, e.g.
 # osfamilymap: {}
 ---
-Debian:
-  pkg:
-    name: podman-debian
-  config: /etc/podman.d/custom.conf
+Debian: {}
 
-RedHat:
-  pkg:
-    name: podman-redhat
-  config: /etc/podman.conf
+RedHat: {}
 
-Suse:
-  pkg:
-    name: podman-suse
+Suse: {}
 
-Gentoo:
-  pkg:
-    name: podman-gentoo
+Gentoo: {}
 
-Arch:
-  pkg:
-    name: podman-arch
-  service:
-    name: service-arch
+Arch: {}
 
 Alpine: {}
 

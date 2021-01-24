@@ -11,18 +11,11 @@
 # osmap: {}
 ---
 # os_family: Debian
-Ubuntu:
-  pkg:
-    name: podman-ubuntu
-  config: /etc/podman.d/custom-ubuntu.conf
+Ubuntu: {}
 Raspbian: {}
 
 # os_family: RedHat
-Fedora:
-  pkg:
-    name: podman-fedora
-  service:
-    name: service-fedora
+Fedora: {}
 CentOS: {}
 Amazon: {}
 
