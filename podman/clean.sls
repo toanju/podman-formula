@@ -3,5 +3,5 @@
 
 include:
   - .service.clean
-  - .config.clean
+  #  - .config.clean
   - .package.clean

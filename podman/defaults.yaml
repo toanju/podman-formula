@@ -4,6 +4,7 @@
 podman:
   pkg:
     name: podman
+  bin: /usr/bin/podman
   rootgroup: root
   service:
     name: podman
