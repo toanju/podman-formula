@@ -12,25 +12,25 @@
 ---
 Debian:
   pkg:
-    name: TEMPLATE-debian
-  config: /etc/TEMPLATE.d/custom.conf
+    name: podman-debian
+  config: /etc/podman.d/custom.conf
 
 RedHat:
   pkg:
-    name: TEMPLATE-redhat
-  config: /etc/TEMPLATE.conf
+    name: podman-redhat
+  config: /etc/podman.conf
 
 Suse:
   pkg:
-    name: TEMPLATE-suse
+    name: podman-suse
 
 Gentoo:
   pkg:
-    name: TEMPLATE-gentoo
+    name: podman-gentoo
 
 Arch:
   pkg:
-    name: TEMPLATE-arch
+    name: podman-arch
   service:
     name: service-arch
 

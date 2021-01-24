@@ -18,7 +18,7 @@ values:
   service:
     name: crond
   subcomponent:
-    config: /etc/TEMPLATE-subcomponent-formula.conf
+    config: /etc/podman-subcomponent-formula.conf
   tofs:
     files_switch:
     - any/path/can/be/used/here
@@ -28,8 +28,8 @@ values:
     - os
     - os_family
     source_files:
-      TEMPLATE-config-file-file-managed:
+      podman-config-file-file-managed:
       - example.tmpl.jinja
-      TEMPLATE-subcomponent-config-file-file-managed:
+      podman-subcomponent-config-file-file-managed:
       - subcomponent-example.tmpl.jinja
   winner: pillar

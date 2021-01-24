@@ -1,9 +1,9 @@
 # frozen_string_literal: true
 
-control 'TEMPLATE subcomponent configuration' do
+control 'podman subcomponent configuration' do
   title 'should match desired lines'
 
-  describe file('/etc/TEMPLATE-subcomponent-formula.conf') do
+  describe file('/etc/podman-subcomponent-formula.conf') do
     it { should be_file }
     it { should be_owned_by 'root' }
     it { should be_grouped_into 'root' }
@@ -11,7 +11,7 @@ control 'TEMPLATE subcomponent configuration' do
     its('content') do
       should include(
         '# File managed by Salt at '\
-        '<salt://TEMPLATE/subcomponent/config/files/default/'\
+        '<salt://podman/subcomponent/config/files/default/'\
         'subcomponent-example.tmpl.jinja>.'
       )
     end
