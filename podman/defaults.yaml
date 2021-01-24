@@ -8,8 +8,6 @@ podman:
   config: '/etc/podman'
   service:
     name: podman
-  subcomponent:
-    config: '/etc/podman-subcomponent-formula.conf'
   # Just here for testing
   added_in_defaults: defaults_value
   winner: defaults
