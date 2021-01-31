@@ -8,14 +8,33 @@ podman:
     winner: lookup
     added_in_lookup: lookup_value
 
-  # Using bash package and udev service as an example. This allows us to
-  # test the template formula itself. You should set these parameters to
-  # examples that make sense in the contexto of the formula you're writing.
   pkg:
-    name: bash
-  service:
-    name: systemd-journald
-  config: /etc/template-formula.conf
+    name: podman
+  bin: /usr/bin/podman
+  rootgroup: root
+  #homedir_prefix: /opt/containers
+
+  containers:
+    prometheus-server:
+      user:
+        name: prometheus
+        homedir: /opt/containers/prometheus
+        groups:
+          - a
+          - b
+          - c
+        desc: Prometheus User
+
+      image: "docker.io/prom/prometheus:v2.6.0"
+      args:
+        - '--config.file=/prometheus/prometheus.yml'
+        - '--storage.tsdb.retention=15d'
+      remove_on_stop: True
+      runoptions:
+        - '--net="host"'
+        - '-v /opt/docker/prometheus:/prometheus:z'
+      stopoptions:
+        - '-t 10'
 
   tofs:
     # The files_switch key serves as a selector for alternative
