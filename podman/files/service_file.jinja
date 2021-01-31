@@ -30,5 +30,7 @@ ExecStop={{ podman_bin }} {{ podman_stop_command }}
 ExecStopPost={{ podman_bin }} {{ podman_poststop_command }}
 {%- endif %}
 
+User={{ container.user.name }}
+
 [Install]
 WantedBy=multi-user.target

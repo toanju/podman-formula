@@ -6,11 +6,13 @@
 {%- set sls_service_clean = tplroot ~ '.service.clean' %}
 {%- from tplroot ~ "/map.jinja" import podman with context %}
 
+{#- XXX: delete users?
 include:
   - {{ sls_service_clean }}
 
-podman-config-clean-file-absent:
-  file.absent:
-    - name: {{ podman.config }}
+podman-config-clean-user-absent:
+  user.absent:
+    - name: {{ podman.user }}
     - require:
       - sls: {{ sls_service_clean }}
+#}

@@ -3,5 +3,5 @@
 
 include:
   - .package
-  #  - .config
+  - .config
   - .service

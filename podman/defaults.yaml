@@ -6,8 +6,30 @@ podman:
     name: podman
   bin: /usr/bin/podman
   rootgroup: root
-  service:
-    name: podman
+  #homedir_prefix: /opt/containers
+
+  containers:
+    prometheus-server:
+      user:
+        name: prometheus
+        homedir: /opt/containers/prometheus
+        groups:
+          - a
+          - b
+          - c
+        desc: Prometheus User
+
+      image: "docker.io/prom/prometheus:v2.6.0"
+      args:
+        - '--config.file=/prometheus/prometheus.yml'
+        - '--storage.tsdb.retention=15d'
+      remove_on_stop: True
+      runoptions:
+        - '--net="host"'
+        - '-v /opt/docker/prometheus:/prometheus:z'
+      stopoptions:
+        - '-t 10'
+
   # Just here for testing
   added_in_defaults: defaults_value
   winner: defaults
