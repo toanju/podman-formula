@@ -8,6 +8,11 @@
 {%- for name, container in podman.containers.items() %}
 
 {#- XXX check if groups are existing ? #}
+{#- XXX configure subuid,subgid #}
+{#- XXX find a better way for config files #}
+{#- XXX set se linux file context:
+    semanage fcontext -a -t container_file_t 'data'
+    restorecon -v 'data' #}
 
 podman-config-user-{{ name }}-user-present:
   user.present:
