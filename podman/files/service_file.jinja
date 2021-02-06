@@ -7,8 +7,8 @@
 {%- set runoptions = runoptions|join(' ') %}
 {%- set stopoptions = stopoptions|join(' ') %}
 {%- set args = args|join(' ') -%}
-
-{%- set podman_start_command = "run %s --name=%s %s %s %s"|format(runoptions, name, container.image, cmd, args) %}
+{%- set user_info = salt.user.info(container.user.name) %}
+{%- set podman_start_command = "run %s --user=%s --userns=keep-id --name=%s %s %s %s"|format(runoptions, user_info.uid, name, container.image, cmd, args) %}
 {%- set podman_stop_command = "stop %s %s"|format(stopoptions, name) %}
 {%- set podman_poststop_command = "rm -f %s"|format(name) -%}
 [Unit]
@@ -19,6 +19,7 @@ Description=Systemd service for container {{ name }}
 
 [Service]
 Restart=always
+RestartSec=30
 
 {%- if pull_before_start %}
 ExecStartPre={{ podman_bin }} pull {{ container.image }}
@@ -31,6 +32,7 @@ ExecStopPost={{ podman_bin }} {{ podman_poststop_command }}
 {%- endif %}
 
 User={{ container.user.name }}
+Group={{ container.user.name }}
 
 [Install]
 WantedBy=multi-user.target

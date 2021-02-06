@@ -6,7 +6,8 @@ podman:
     name: podman
   bin: /usr/bin/podman
   rootgroup: root
-  #homedir_prefix: /opt/containers
+  homedir_prefix: /opt/containers
+  default_shell: /sbin/nologin
 
   containers: {}
 

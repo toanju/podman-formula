@@ -6,15 +6,33 @@
 {%- from tplroot ~ "/map.jinja" import podman with context %}
 
 {%- for name, container in podman.containers.items() %}
+
+{#- XXX check if groups are existing ? #}
+
 podman-config-user-{{ name }}-user-present:
   user.present:
     - name: {{ container.user.name }}
     - usergroup: True
+{%- if 'groups' in container.user %}
     - groups: {{ container.user.groups }}
+{%- endif %}
     - remove_groups: True
-    - home: {{ container.user.homedir }} {# XXX remove and combine ? #}
+    - home: {{ podman.homedir_prefix }}/{{ container.user.name }}
     - createhome: True
-    - shell: /sbin/nologin
+    - shell: {{ podman.default_shell }}
     - system: True
-    - fullname: {{ container.user.desc }} {# XXX remove and combine ? #}
+    - fullname: Podman {{ name }}
+
+{#- data directory #}
+podman-config-user-{{ name }}-file-directory:
+  file.directory:
+    - name: {{ podman.homedir_prefix }}/{{ container.user.name }}/data
+    - user: {{ container.user.name }}
+    - group: {{ container.user.name }}
+    - recurse:
+      - user
+      - group
+    - require:
+      - user: podman-config-user-{{ name }}-user-present
+
 {%- endfor %}
