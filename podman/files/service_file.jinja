@@ -7,8 +7,12 @@
 {%- set runoptions = runoptions|join(' ') %}
 {%- set stopoptions = stopoptions|join(' ') %}
 {%- set args = args|join(' ') -%}
+{%- set userns = "" %}
+{%- if container.get("userns", False) %}
 {%- set user_info = salt.user.info(container.user.name) %}
-{%- set podman_start_command = "run %s --user=%s --userns=keep-id --name=%s %s %s %s"|format(runoptions, user_info.uid, name, container.image, cmd, args) %}
+{%- set userns = "--user=%s --userns=keep-id"|format(user_info.uid) %}
+{%- endif %}
+{%- set podman_start_command = "run %s %s --name=%s %s %s %s"|format(runoptions, userns, name, container.image, cmd, args) %}
 {%- set podman_stop_command = "stop %s %s"|format(stopoptions, name) %}
 {%- set podman_poststop_command = "rm -f %s"|format(name) -%}
 [Unit]
