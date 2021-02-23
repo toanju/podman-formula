@@ -13,6 +13,7 @@
 {#- XXX set se linux file context:
     semanage fcontext -a -t container_file_t 'data'
     restorecon -v 'data' #}
+{#- XXX split this file up #}
 
 podman-config-user-{{ name }}-user-present:
   user.present:
@@ -39,5 +40,18 @@ podman-config-user-{{ name }}-file-directory:
       - group
     - require:
       - user: podman-config-user-{{ name }}-user-present
+
+{#- selinux context #}
+podman-config-user-{{ name }}-selinux-fcontext_policy_present:
+  selinux.fcontext_policy_present:
+    - name: {{ podman.homedir_prefix }}/{{ container.user.name }}/data
+    - sel_type: container_file_t
+    - require:
+      - file: podman-config-user-{{ name }}-file-directory
+
+podman-config-user-{{ name }}-selinux-fcontext_policy_applied:
+  selinux.fcontext_policy_applied:
+    - name: {{ podman.homedir_prefix }}/{{ container.user.name }}/data
+    - recursive: True
 
 {%- endfor %}
