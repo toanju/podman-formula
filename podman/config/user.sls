@@ -44,7 +44,7 @@ podman-config-user-{{ name }}-file-directory:
 {#- selinux context #}
 podman-config-user-{{ name }}-selinux-fcontext_policy_present:
   selinux.fcontext_policy_present:
-    - name: {{ podman.homedir_prefix }}/{{ container.user.name }}/data
+    - name: "{{ podman.homedir_prefix }}/{{ container.user.name }}/data(/.*)?"
     - sel_type: container_file_t
     - require:
       - file: podman-config-user-{{ name }}-file-directory
