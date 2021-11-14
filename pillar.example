@@ -26,7 +26,7 @@ podman:
       args:
         - '--config.file=/prometheus/prometheus.yml'
         - '--storage.tsdb.retention=15d'
-      remove_on_stop: True
+      remove_on_stop: true
       runoptions:
         - '--net="host"'
         - '-v /opt/docker/prometheus:/prometheus:z'
