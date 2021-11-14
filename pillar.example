@@ -32,6 +32,7 @@ podman:
         - '-v /opt/docker/prometheus:/prometheus:z'
       stopoptions:
         - '-t 10'
+      timeout_start_sec: 300
 
   tofs:
     # The files_switch key serves as a selector for alternative
